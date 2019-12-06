@@ -1,19 +1,25 @@
 const express = require("express");
-
 const server = express();
-const projectRouter = require("./routers/projectRouter");
 
-//custom logger Middleware
+const actionsRouter = require("./routers/actionRouters");
+const projectRouter = require("./routers/projecrRouter");
+
+server.use(express.json());
+server.use(logger);
+server.use("/actions", actionsRouter);
+server.use("/projects", projectRouter);
+
+server.get("/", (req, res) => {
+  res.status(200).json({ Success: "Server up and running" });
+});
+
 function logger(req, res, next) {
-  console.log(`${req.method} to ${req.url} at ${Date.now()}`);
+  console.log(
+    `[${new Date().toISOString()}]${req.method} to ${req.url} from ${req.get(
+      "host"
+    )}`
+  );
   next();
 }
 
-server.use(logger);
-server.use(express.json());
-server.use("/api/", projectRouter);
-
-server.get("/", (req, res) => {
-  res.send(`<h2>WebApi Sprint!</h2`);
-});
 module.exports = server;
