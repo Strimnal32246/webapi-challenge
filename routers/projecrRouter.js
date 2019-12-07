@@ -23,7 +23,7 @@ router.get("/:id", validateProjectsId, (req, res) => {
     });
 });
 
-router.post("/", (req, res) => {
+router.post("/projects", (req, res) => {
   const proj = req.body;
   db.insert(proj)
     .then(project => {
@@ -36,7 +36,7 @@ router.post("/", (req, res) => {
     });
 });
 
-router.delete("/:id", validateProjectsId, (req, res) => {
+router.delete("projects/:id", validateProjectsId, (req, res) => {
   const id = req.params.id;
   db.remove(id)
     .then(project => {
@@ -50,7 +50,7 @@ router.delete("/:id", validateProjectsId, (req, res) => {
     });
 });
 
-router.put("/:id", validateProjectsId, (req, res) => {
+router.put("projects/:id", validateProjectsId, (req, res) => {
   const id = req.params.id;
   const changes = req.body;
   db.update(id, changes)
@@ -62,7 +62,7 @@ router.put("/:id", validateProjectsId, (req, res) => {
     });
 });
 
-router.get("/:id/actions", (req, res) => {
+router.get("actions/:id/actions", (req, res) => {
   const { id } = req.params;
   db.getProjectActions(id)
     .then(proj => {

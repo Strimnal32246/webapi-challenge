@@ -25,7 +25,7 @@ router.get("/:id", validateActionsId, (req, res) => {
     });
 });
 
-router.post("/:id", (req, res) => {
+router.post("actions/:id", (req, res) => {
   const action = req.body;
   const { id } = req.params;
 
@@ -41,7 +41,7 @@ router.post("/:id", (req, res) => {
     });
 });
 
-router.delete("/:id", (req, res) => {
+router.delete("actions/:id", (req, res) => {
   const id = req.params.id;
   db.remove(id)
     .then(actions => {
@@ -53,7 +53,7 @@ router.delete("/:id", (req, res) => {
     });
 });
 
-router.put("/:id", (req, res) => {
+router.put("actions/:id", (req, res) => {
   const id = req.params.id;
   const changes = req.body;
   db.update(id, changes)
